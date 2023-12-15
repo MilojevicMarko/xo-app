@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cell = ({ id, cell, setCells, firstGo, setFirstGo, winner }) => {
+const Cell = ({ id, cell, cells, setCells, firstGo, setFirstGo, winner }) => {
 	const handleGame = (e) => {
 		let taken =
 			e.target.firstChild.classList.contains('circle') ||
@@ -10,14 +10,27 @@ const Cell = ({ id, cell, setCells, firstGo, setFirstGo, winner }) => {
 			if (firstGo === 'circle') {
 				e.target.firstChild.classList.add('circle');
 				setFirstGo('cross');
+				handleCellChange('circle');
 			} else if (firstGo === 'cross') {
 				e.target.firstChild.classList.add('cross');
 				setFirstGo('circle');
+				handleCellChange('cross');
 			}
 		}
 	};
+
+	const handleCellChange = (classList) => {
+		let updateArrayCell = cells.map((el, index) => {
+			if (index === id) {
+				return classList;
+			} else {
+				return el;
+			}
+		});
+		setCells(updateArrayCell);
+	};
+
 	return (
-		//TODO:
 		<div
 			className='square'
 			id={id}
@@ -26,5 +39,4 @@ const Cell = ({ id, cell, setCells, firstGo, setFirstGo, winner }) => {
 		</div>
 	);
 };
-
 export default Cell;
