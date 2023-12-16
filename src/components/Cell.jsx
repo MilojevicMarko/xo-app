@@ -34,7 +34,7 @@ const Cell = ({ id, cell, cells, setCells, firstGo, setFirstGo, winner }) => {
 		<div
 			className='square'
 			id={id}
-			onClick={handleGame}>
+			onClick={!winner ? handleGame : null}>
 			<div className={cell}></div>
 		</div>
 	);

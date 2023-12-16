@@ -6,6 +6,8 @@ function App() {
 	const [firstGo, setFirstGo] = useState('circle'); //circle play first
 	const [winner, setWinner] = useState(null);
 
+	let checkArray = cells.every((cell) => cell !== '');
+
 	useEffect(() => {
 		chechWinner();
 	}, [cells]);
@@ -31,10 +33,19 @@ function App() {
 			} else if (circleWinner) {
 				setWinner('Winner is Cicrle');
 				return;
+			} else if (checkArray) {
+				setWinner('We dont have a winner!');
 			}
 		});
 	};
 
+	const handleResetGame = () => {
+		if (winner || checkArray) {
+			let emptyArray = new Array(9).fill('');
+			setCells(emptyArray);
+			setWinner(null);
+		}
+	};
 	return (
 		<div className='app'>
 			<h1 className='title'>XO Game</h1>
@@ -54,6 +65,11 @@ function App() {
 					);
 				})}
 			</div>
+			<button
+				type='submit'
+				onClick={handleResetGame}>
+				Reset Game
+			</button>
 			{winner && <h2>{winner}</h2>}
 		</div>
 	);
