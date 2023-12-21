@@ -10,6 +10,7 @@ function App() {
 
 	useEffect(() => {
 		chechWinner();
+		console.log(cells, 'cells');
 	}, [cells]);
 
 	const chechWinner = () => {

@@ -2,17 +2,18 @@ import React from 'react';
 
 const Cell = ({ id, cell, cells, setCells, firstGo, setFirstGo, winner }) => {
 	const handleGame = (e) => {
+		console.dir(e.target);
 		let taken =
-			e.target.firstChild.classList.contains('circle') ||
-			e.target.firstChild.classList.contains('cross');
+			e.target.firstChild?.classList.contains('circle') ||
+			e.target.firstChild?.classList.contains('cross');
 
-		if (!taken) {
+		if (!taken && taken !== undefined) {
 			if (firstGo === 'circle') {
-				e.target.firstChild.classList.add('circle');
+				e.target.firstChild?.classList.add('circle');
 				setFirstGo('cross');
 				handleCellChange('circle');
 			} else if (firstGo === 'cross') {
-				e.target.firstChild.classList.add('cross');
+				e.target.firstChild?.classList.add('cross');
 				setFirstGo('circle');
 				handleCellChange('cross');
 			}
@@ -34,7 +35,7 @@ const Cell = ({ id, cell, cells, setCells, firstGo, setFirstGo, winner }) => {
 		<div
 			className='square'
 			id={id}
-			onClick={!winner ? handleGame : null}>
+			onClick={!winner && cell === '' ? handleGame : null}>
 			<div className={cell}></div>
 		</div>
 	);
